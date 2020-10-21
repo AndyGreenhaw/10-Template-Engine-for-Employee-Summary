@@ -10,8 +10,10 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const employees = []
+
 employeeCreator()
-employees = []
+
 
 function employeeCreator(){
     inquirer.prompt ([
@@ -19,18 +21,21 @@ function employeeCreator(){
         type: "list",
         message: "What employee role would you like to add to your team?",
         choices: ["Manager","Engineer","Intern", "My Team Is Complete"],
-        name: "role"
+        name: "newEmployee"
         }
     ]).then(response=> {
-        switch(response.role){
+        switch(response.newEmployee){
             case "Manager": managerQ();
             break;
             case "Engineer": engineerQ();
             break;
             case "Intern": internQ();
             break;
-            case "My Team Is Complete": console.log("Your team is ready to view.");
-            break;
+            case "My Team Is Complete": fs.writeFileSync('employees.html', render(employees), function(err){
+                if(err){
+                    return console.log(err)
+                }
+            })
         }
     })
 }
