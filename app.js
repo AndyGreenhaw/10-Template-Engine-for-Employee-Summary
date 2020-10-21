@@ -14,7 +14,6 @@ const employees = []
 
 employeeCreator()
 
-
 function employeeCreator(){
     inquirer.prompt ([
         {
@@ -45,25 +44,26 @@ function managerQ(){
         {
             type: "input",
             message: "What is the employee's name?",
-            name: "name"
+            name: "managerName"
         },
         {
             type: "input",
             message: "What is the employee's ID number?",
-            name: "id"
+            name: "managerId"
         },
         {
             type: "input",
             message: "What is the employee's email address?",
-            name: "email"
+            name: "managerEmail"
         },
         {
             type: "input",
             message: "What is the manager's office Number?",
-            name: "officeNumber"
+            name: "managerOfficeNumber"
         }
     ]).then(response => { 
-        employees.push(response)
+        const manager = new Manager (response.managerName, response.managerID, response.managerEmail, response.managerOfficeNum)
+        employees.push(manager)
         employeeCreator()
     })
 }
@@ -73,25 +73,26 @@ function engineerQ(){
         {
             type: "input",
             message: "What is the employee's name?",
-            name: "name"
+            name: "engineerName"
         },
         {
             type: "input",
             message: "What is the employee's ID number?",
-            name: "id"
+            name: "engineerId"
         },
         {
             type: "input",
             message: "What is the employee's email address?",
-            name: "email"
+            name: "engineerEmail"
         },
         {
             type: "input",
             message: "What is the engineer's GitHub account name?",
-            name: "github"
+            name: "engineerGithub"
         }
     ]).then(response => { 
-        employees.push(response)
+        const engineer = new Engineer (response.engineerName, response.engineerID, response.engineerEmail, response.engineerGithub)
+        employees.push(engineer)
         employeeCreator()
     })
 }
@@ -102,25 +103,26 @@ function internQ(){
         {
             type: "input",
             message: "What is the employee's name?",
-            name: "name"
+            name: "interName"
         },
         {
             type: "input",
             message: "What is the employee's ID number?",
-            name: "id"
+            name: "internId"
         },
         {
             type: "input",
             message: "What is the employee's email address?",
-            name: "email"
+            name: "internEmail"
         },
         {
             type: "input",
             message: "What is the name of the student's school?",
-            name: "school"
+            name: "internSchool"
         }
     ]).then(response => { 
-        employees.push(response)
+        const intern = new Intern (response.internName, response.internID, response.internEmail, response.internSchool)
+        employees.push(intern)
         employeeCreator()
     })
 }
