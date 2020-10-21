@@ -10,73 +10,116 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+employeeCreator()
 employees = []
 
-generalQ = [
-    {
-        type: "input",
-        message: "What is the employee's name?",
-        name: "name"
-    },
-    {
-        type: "input",
-        message: "What is the employee's ID number?",
-        name: "id"
-    },
-    {
-        type: "input",
-        message: "What is the employee's email address?",
-        name: "email"
-    },
-    {
+function employeeCreator(){
+    inquirer.prompt ([
+        {
         type: "list",
-        message: "What is the employee's role at the company?",
-        choices: [
-            "Manager",
-            "Engineer",
-            "Intern"
-        ],
+        message: "What employee role would you like to add to your team?",
+        choices: ["Manager","Engineer","Intern", "My Team Is Complete"],
         name: "role"
-    }   
-];
+        }
+    ]).then(response=> {
+        switch(response.role){
+            case "Manager": managerQ();
+            break;
+            case "Engineer": engineerQ();
+            break;
+            case "Intern": internQ();
+            break;
+            case "My Team Is Complete": console.log("Your team is ready to view.");
+            break;
+        }
+    })
+}
 
-managerQ = {
-        type: "input",
-        message: "What is the manager's office Number?",
-        name: "officeNumber"
-};
+function managerQ(){
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What is the employee's name?",
+            name: "name"
+        },
+        {
+            type: "input",
+            message: "What is the employee's ID number?",
+            name: "id"
+        },
+        {
+            type: "input",
+            message: "What is the employee's email address?",
+            name: "email"
+        },
+        {
+            type: "input",
+            message: "What is the manager's office Number?",
+            name: "officeNumber"
+        }
+    ]).then(response => { 
+        employees.push(response)
+        employeeCreator()
+    })
+}
 
-engineerQ = {
-    type: "input",
-    message: "What is the engineer's GitHub account name?",
-    name: "github"
-};
+function engineerQ(){
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What is the employee's name?",
+            name: "name"
+        },
+        {
+            type: "input",
+            message: "What is the employee's ID number?",
+            name: "id"
+        },
+        {
+            type: "input",
+            message: "What is the employee's email address?",
+            name: "email"
+        },
+        {
+            type: "input",
+            message: "What is the engineer's GitHub account name?",
+            name: "github"
+        }
+    ]).then(response => { 
+        employees.push(response)
+        employeeCreator()
+    })
+}
 
-internQ = {
-    type: "input",
-    message: "What is the name of the student's school?",
-    name: "school"
-};
 
+function internQ(){
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What is the employee's name?",
+            name: "name"
+        },
+        {
+            type: "input",
+            message: "What is the employee's ID number?",
+            name: "id"
+        },
+        {
+            type: "input",
+            message: "What is the employee's email address?",
+            name: "email"
+        },
+        {
+            type: "input",
+            message: "What is the name of the student's school?",
+            name: "school"
+        }
+    ]).then(response => { 
+        employees.push(response)
+        employeeCreator()
+    })
+}
 
-inquirer.prompt(generalQ).then(function(response){
-    console.log(response);
-
-    switch(response.role){
-        case "Manager": 
-        inquirer.prompt(managerQ)
-        break
-        case "Engineer": 
-        inquirer.prompt(engineerQ)
-        break
-        case "Intern": 
-        inquirer.prompt(internQ)
-        break
-    }
-
-}).then(function(response){
-    console.log("Worked")
-})
 
 
 // Write code to use inquirer to gather information about the development team members,
@@ -84,7 +127,7 @@ inquirer.prompt(generalQ).then(function(response){
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
+// generate and return a block of HTML including templated (div) for each employee!
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
