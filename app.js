@@ -62,7 +62,7 @@ function managerQ(){
             name: "managerOfficeNumber"
         }
     ]).then(response => { 
-        const manager = new Manager (response.managerName, response.managerID, response.managerEmail, response.managerOfficeNum)
+        const manager = new Manager (response.managerName, response.managerId, response.managerEmail, response.managerOfficeNumber)
         employees.push(manager)
         employeeCreator()
     })
@@ -91,7 +91,7 @@ function engineerQ(){
             name: "engineerGithub"
         }
     ]).then(response => { 
-        const engineer = new Engineer (response.engineerName, response.engineerID, response.engineerEmail, response.engineerGithub)
+        const engineer = new Engineer (response.engineerName, response.engineerId, response.engineerEmail, response.engineerGithub)
         employees.push(engineer)
         employeeCreator()
     })
@@ -103,7 +103,7 @@ function internQ(){
         {
             type: "input",
             message: "What is the employee's name?",
-            name: "interName"
+            name: "internName"
         },
         {
             type: "input",
@@ -121,7 +121,11 @@ function internQ(){
             name: "internSchool"
         }
     ]).then(response => { 
-        const intern = new Intern (response.internName, response.internID, response.internEmail, response.internSchool)
+
+        console.log(response)
+
+        const intern = new Intern (response.internName, response.internId, response.internEmail, response.internSchool)
+
         employees.push(intern)
         employeeCreator()
     })
